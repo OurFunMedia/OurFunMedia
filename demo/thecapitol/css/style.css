@@ -1,0 +1,16 @@
+body{
+    margin: 0;
+    font-size: medium;
+    line-height: 1.5;
+    background: rgb(80, 80, 80);
+    font-family: 'Open Sans', sans-serif;
+}
+
+body a:hover{
+	text-decoration:none;
+}
+
+#intro .container h1{
+    font-family: 'Quintessential', cursive;
+    font-style: italic;
+}
