@@ -10,7 +10,25 @@ body a:hover{
 	text-decoration:none;
 }
 
+#navbar {
+    font-size: larger;
+}
+
 #intro .container h1{
     font-family: 'Quintessential', cursive;
     font-style: italic;
+}
+
+#google_map iframe{
+    width: 100%;
+    min-height: 500px;
+}
+
+#footer ul li{
+    display: block;
+}
+
+#footer ul li a{
+    color: white;
+    text-decoration: none;
 }
