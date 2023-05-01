@@ -1,0 +1,15 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: #666666;
+    font-size: 18px;
+    font-weight: normal;
+    background-color: #eeeeee;
+}
+
+#main_box .row img {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
