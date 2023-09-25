@@ -1,0 +1,74 @@
+body {
+    font-family: 'Noto Sans HK', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Rubik', sans-serif;
+    font-size: 22px;
+    background-color: #f8f9fa;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.mybox {
+    background-color: #e9ecef;
+    padding: 20px 20px 20px 20px;
+    margin: 20px 0px 20px 0px;
+}
+
+.mytext {
+    padding: 20px 10px 20px 10px;
+}
+
+.mytext h2 {
+    color: #00BFA6;
+}
+
+.mytext p {
+    color:rgb(78, 78, 78);
+}
+
+.logo {
+    width: 38%;
+}
+
+.img_aboutus {
+    width: 100%;
+}
+
+.img_webpage {
+    width: 100%;
+}
+
+.img_product {
+    width: 100%;
+}
+
+.img_contact {
+    width: 100%;
+}
+
+.img_whatsapp {
+    width: 6rem;
+}
+
+.myimghoverzoomout a img {
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.myimghoverzoomout a:hover img {
+    -webkit-transform: scale(0.8);
+	transform: scale(0.8);
+}
+
+.myimghoverzoomout a:hover p {
+    color: #00BFA6;
+    transition: all 1s;
+}
