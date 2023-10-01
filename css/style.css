@@ -72,3 +72,103 @@ a {
     color: #00BFA6;
     transition: all 1s;
 }
+
+/* mycard */
+
+.mycard {
+    /* font-weight: bold;
+    padding: 1em;
+    text-align: right;
+    color: #181a1a; */
+    background-color: transparent;
+    border: transparent;
+    
+    /* width:  300px; */
+    /* height: 400px; */
+    /* box-shadow: 0 1px 5px #00000099; */
+    
+    border-radius: 10px;
+    /*background-image: url(https://images.unsplash.com/photo-1557672199-6e8c8b2b8fff?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80);*/
+    /* background-size: cover; */
+    
+    position: relative;
+    
+    transition-duration: 300ms;
+    transition-property: transform;
+    /* transition-property: transform, box-shadow; */
+    transition-timing-function: ease-out;
+    transform: rotate3d(0);
+  }
+  
+  .mycard:hover {
+    transition-duration: 150ms;
+    /* box-shadow: 0 5px 20px 5px #00000044; */
+  }
+  
+  .mycard .glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    /* background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f); */
+  }
+
+/* myparallax */
+
+.myparallax {
+    transition: all 1s;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+.myparallax:hover {
+    transform: translateX(2vh);
+    transition: all 1s;
+}
+*/
+
+.myparallax .myparallax01 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.myparallax .myparallax02 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    transition: all 1s;
+}
+
+.myparallax:hover .myparallax02 {
+    transform: translateX(1vh);
+    transition: all 1s;
+}
+
+.myparallax .myparallax03 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    transition: all 1s;
+}
+
+.myparallax:hover .myparallax03 {
+    transform: translateX(1.5vh);
+    transition: all 1s;
+}
+
+.myparallax .myparallax04 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    transition: all 1s;
+}
+
+.myparallax:hover .myparallax04 {
+    transform: translateX(2vh);
+    transition: all 1s;
+}
