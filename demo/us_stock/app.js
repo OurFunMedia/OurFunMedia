@@ -15,7 +15,7 @@ async function fetchStockPrice() {
 
 function updateStockPrice() {
   fetchStockPrice();
-  setInterval(fetchStockPrice, 60000); // 每分鐘更新一次
+  setInterval(fetchStockPrice, 7200000); // 60000=每分鐘更新一次
 }
 
 updateStockPrice();
