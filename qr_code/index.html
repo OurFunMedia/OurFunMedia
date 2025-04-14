@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code 生成器</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next@21.10.0/i18next.min.js"></script>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="d-flex justify-content-end mb-3">
+      <select id="languageSelect" class="form-select w-auto">
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+
+    <h1 class="text-center mb-4" id="title">QR Code 生成器</h1>
+
+    <div class="card p-4 shadow">
+      <div class="mb-3">
+        <label for="text" class="form-label" id="labelText">輸入文字或網址</label>
+        <input type="text" id="text" class="form-control" placeholder="https://example.com">
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="size" class="form-label" id="labelSize">尺寸 (px)</label>
+          <input type="number" id="size" class="form-control" value="200" min="100" max="500">
+        </div>
+        <div class="col">
+          <label for="color" class="form-label" id="labelColor">顏色</label>
+          <input type="color" id="color" class="form-control form-control-color" value="#000000">
+        </div>
+      </div>
+
+      <button class="btn btn-primary w-100" onclick="generateQRCode()" id="generateBtn">產生 QR Code</button>
+    </div>
+
+    <div class="text-center mt-4" id="qrcode"></div>
+  </div>
+
+  <script>
+    // 語言設定
+    const resources = {
+      en: {
+        translation: {
+          "title": "QR Code Generator",
+          "labelText": "Enter text or URL",
+          "labelSize": "Size (px)",
+          "labelColor": "Color",
+          "generateBtn": "Generate QR Code"
+        }
+      },
+      zh: {
+        translation: {
+          "title": "QR Code 生成器",
+          "labelText": "輸入文字或網址",
+          "labelSize": "尺寸 (px)",
+          "labelColor": "顏色",
+          "generateBtn": "產生 QR Code"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'zh',
+      resources
+    }, function(err, t) {
+      updateContent();
+    });
+
+    document.getElementById("languageSelect").addEventListener("change", function () {
+      const lang = this.value;
+      i18next.changeLanguage(lang, updateContent);
+    });
+
+    function updateContent() {
+      document.getElementById("title").innerText = i18next.t('title');
+      document.getElementById("labelText").innerText = i18next.t('labelText');
+      document.getElementById("labelSize").innerText = i18next.t('labelSize');
+      document.getElementById("labelColor").innerText = i18next.t('labelColor');
+      document.getElementById("generateBtn").innerText = i18next.t('generateBtn');
+    }
+
+    // 產生 QR Code
+    function generateQRCode() {
+      const text = document.getElementById("text").value;
+      const size = parseInt(document.getElementById("size").value);
+      const color = document.getElementById("color").value;
+
+      const container = document.getElementById("qrcode");
+      container.innerHTML = ""; // 清除舊的
+
+      if (text.trim() === "") {
+        alert("請輸入內容 / Please enter text");
+        return;
+      }
+
+      new QRCode(container, {
+        text: text,
+        width: size,
+        height: size,
+        colorDark: color,
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+  </script>
+</body>
+</html>
