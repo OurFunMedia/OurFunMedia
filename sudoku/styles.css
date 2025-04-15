@@ -57,6 +57,25 @@ body {
     padding: 0 10px;
 }
 
+@media (min-width: 768px) {
+    .container-fluid {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-fluid {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-fluid {
+        max-width: 1140px;
+    }
+}
+
 h1 {
     color: var(--title-color);
     font-weight: 600;
@@ -108,6 +127,12 @@ h1 {
     max-width: 100%;
     margin: 0 auto;
     aspect-ratio: 1;
+}
+
+@media (min-width: 768px) {
+    .sudoku-board {
+        max-width: 450px;
+    }
 }
 
 .cell {
