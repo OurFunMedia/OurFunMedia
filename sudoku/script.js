@@ -18,9 +18,21 @@ let currentTheme = localStorage.getItem('sudoku-theme') || 'light';
 
 // 難度設定 (空格數量)
 const difficultySettings = {
-    easy: 30,    // 30個空格 (適合小朋友)
-    medium: 40,  // 40個空格
-    hard: 50     // 50個空格 (適合大人)
+    easy: {
+        cellsToRemove: 30,    // 30個空格
+        color: '#28a745',     // 綠色
+        description: '適合初學者'
+    },
+    medium: {
+        cellsToRemove: 40,    // 40個空格
+        color: '#ffc107',     // 黃色
+        description: '適合一般玩家'
+    },
+    hard: {
+        cellsToRemove: 50,    // 50個空格
+        color: '#dc3545',     // 紅色
+        description: '適合進階玩家'
+    }
 };
 
 // 頁面載入時初始化
@@ -54,9 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // 設置難度按鈕事件
     document.querySelectorAll('.btn-difficulty').forEach(button => {
         button.addEventListener('click', () => {
-            document.querySelectorAll('.btn-difficulty').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            difficulty = button.dataset.difficulty;
+            const newDifficulty = button.dataset.difficulty;
+            
+            // 如果正在遊戲中，顯示確認提示
+            if (gameActive) {
+                if (confirm(`確定要切換到${newDifficulty}難度嗎？當前遊戲進度將會丟失。`)) {
+                    changeDifficulty(newDifficulty);
+                }
+            } else {
+                changeDifficulty(newDifficulty);
+            }
         });
     });
     
@@ -233,7 +252,7 @@ function generateSudoku() {
     }
     
     // 根據難度移除數字
-    const cellsToRemove = difficultySettings[difficulty];
+    const cellsToRemove = difficultySettings[difficulty].cellsToRemove;
     removeNumbers(cellsToRemove);
 }
 
@@ -487,4 +506,44 @@ function applyTheme(theme) {
         document.body.classList.remove('dark-theme');
     }
     currentTheme = theme;
+}
+
+// 切換難度
+function changeDifficulty(newDifficulty) {
+    // 更新按鈕樣式
+    document.querySelectorAll('.btn-difficulty').forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.backgroundColor = '';
+    });
+    
+    const activeButton = document.querySelector(`[data-difficulty="${newDifficulty}"]`);
+    activeButton.classList.add('active');
+    activeButton.style.backgroundColor = difficultySettings[newDifficulty].color;
+    
+    // 更新難度
+    difficulty = newDifficulty;
+    
+    // 重新開始遊戲
+    startNewGame();
+    
+    // 顯示難度提示
+    showDifficultyMessage(newDifficulty);
+}
+
+// 顯示難度提示
+function showDifficultyMessage(difficulty) {
+    const message = document.createElement('div');
+    message.className = 'difficulty-message';
+    message.style.backgroundColor = difficultySettings[difficulty].color;
+    message.textContent = difficultySettings[difficulty].description;
+    
+    document.body.appendChild(message);
+    
+    // 添加動畫效果
+    setTimeout(() => {
+        message.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(message);
+        }, 500);
+    }, 2000);
 }
