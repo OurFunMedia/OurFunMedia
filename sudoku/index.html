@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container my-5">
+    <div class="container-fluid px-3 py-4">
         <div class="row">
-            <div class="col-md-8 mx-auto text-center">
-                <h1 class="mb-4">Sudoku</h1>
+            <div class="col-12 text-center">
+                <h1 class="mb-3">Sudoku</h1>
                 
                 <!-- 主題和語言選擇器 -->
-                <div class="settings-bar d-flex justify-content-center mb-3">
-                    <div class="theme-selector me-4">
+                <div class="settings-bar d-flex flex-column align-items-center mb-3">
+                    <div class="theme-selector mb-2">
                         <span class="me-2">Theme:</span>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-theme" data-theme="light" title="淺色主題">☀️</button>
@@ -35,33 +35,35 @@
                     </div>
                 </div>
                 
-                <div class="difficulty-selector mb-4">
+                <div class="difficulty-selector mb-3">
                     <h5>Difficulty:</h5>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-difficulty" data-difficulty="easy">Easy</button>
-                        <button type="button" class="btn btn-difficulty" data-difficulty="medium">Medium</button>
-                        <button type="button" class="btn btn-difficulty" data-difficulty="hard">Hard</button>
+                    <div class="btn-group w-100" role="group">
+                        <button type="button" class="btn btn-difficulty flex-grow-1" data-difficulty="easy">Easy</button>
+                        <button type="button" class="btn btn-difficulty flex-grow-1" data-difficulty="medium">Medium</button>
+                        <button type="button" class="btn btn-difficulty flex-grow-1" data-difficulty="hard">Hard</button>
                     </div>
                 </div>
                 
-                <div class="game-info mb-3">
+                <div class="game-info d-flex justify-content-around mb-3">
                     <div class="timer">Time:<span id="minutes">00</span>:<span id="seconds">00</span></div>
                     <div class="errors">Errors:<span id="error-count">0</span></div>
                 </div>
                 
-                <div class="sudoku-container">
+                <div class="sudoku-container mb-3">
                     <div id="sudoku-board" class="sudoku-board"></div>
                 </div>
                 
-                <div class="controls mt-4">
-                    <button id="new-game" class="btn btn-primary me-2">New Game</button>
-                    <button id="check" class="btn btn-info me-2">Check</button>
-                    <button id="hint" class="btn btn-warning me-2">Hint</button>
-                    <button id="solve" class="btn btn-danger">Solve</button>
+                <div class="controls mb-3">
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        <button id="new-game" class="btn btn-primary">New Game</button>
+                        <button id="check" class="btn btn-info">Check</button>
+                        <button id="hint" class="btn btn-warning">Hint</button>
+                        <button id="solve" class="btn btn-danger">Solve</button>
+                    </div>
                 </div>
                 
-                <div class="number-pad mt-4">
-                    <div class="number-buttons">
+                <div class="number-pad">
+                    <div class="number-buttons d-flex flex-wrap justify-content-center gap-2">
                         <button class="btn btn-number" data-number="1">1</button>
                         <button class="btn btn-number" data-number="2">2</button>
                         <button class="btn btn-number" data-number="3">3</button>
