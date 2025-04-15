@@ -53,8 +53,8 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.container {
-    max-width: 800px;
+.container-fluid {
+    padding: 0 10px;
 }
 
 h1 {
@@ -92,7 +92,8 @@ h1 {
 .sudoku-container {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin: 15px 0;
+    width: 100%;
 }
 
 .sudoku-board {
@@ -103,18 +104,20 @@ h1 {
     background-color: var(--board-bg);
     border: 2px solid var(--board-border);
     border-radius: 5px;
-    max-width: 450px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
+    aspect-ratio: 1;
 }
 
 .cell {
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--cell-bg);
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 4vw, 1.5rem);
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -270,18 +273,26 @@ h1 {
 /* 響應式設計 */
 @media (max-width: 576px) {
     .cell {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
+        font-size: clamp(0.8rem, 3.5vw, 1.2rem);
     }
     
     .number-buttons {
         grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
     }
     
     .controls .btn {
-        margin: 5px;
+        padding: 6px 12px;
         font-size: 0.9rem;
+    }
+    
+    .game-info {
+        font-size: 0.9rem;
+    }
+    
+    .btn-theme, .btn-language {
+        min-width: 2rem;
+        font-size: 1rem;
     }
 }
 
