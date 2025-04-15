@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+                <h1 class="mb-4">Sudoku</h1>
+                
+                <!-- 主題和語言選擇器 -->
+                <div class="settings-bar d-flex justify-content-center mb-3">
+                    <div class="theme-selector me-4">
+                        <span class="me-2">Theme:</span>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-theme" data-theme="light" title="淺色主題">☀️</button>
+                            <button type="button" class="btn btn-theme" data-theme="dark" title="深色主題">🌙</button>
+                        </div>
+                    </div>
+                    <div class="language-selector">
+                        <span class="me-2">Language:</span>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-language" data-language="zh-TW" title="繁體中文">🇹🇼</button>
+                            <button type="button" class="btn btn-language" data-language="zh-CN" title="简体中文">🇨🇳</button>
+                            <button type="button" class="btn btn-language" data-language="en-US" title="English">🇺🇸</button>
+                            <button type="button" class="btn btn-language" data-language="ja-JP" title="日本語">🇯🇵</button>
+                            <button type="button" class="btn btn-language" data-language="ko-KR" title="한국어">🇰🇷</button>
+                            <button type="button" class="btn btn-language" data-language="th-TH" title="ไทย">🇹🇭</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="difficulty-selector mb-4">
+                    <h5>Difficulty:</h5>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-difficulty" data-difficulty="easy">Easy</button>
+                        <button type="button" class="btn btn-difficulty" data-difficulty="medium">Medium</button>
+                        <button type="button" class="btn btn-difficulty" data-difficulty="hard">Hard</button>
+                    </div>
+                </div>
+                
+                <div class="game-info mb-3">
+                    <div class="timer">Time:<span id="minutes">00</span>:<span id="seconds">00</span></div>
+                    <div class="errors">Errors:<span id="error-count">0</span></div>
+                </div>
+                
+                <div class="sudoku-container">
+                    <div id="sudoku-board" class="sudoku-board"></div>
+                </div>
+                
+                <div class="controls mt-4">
+                    <button id="new-game" class="btn btn-primary me-2">New Game</button>
+                    <button id="check" class="btn btn-info me-2">Check</button>
+                    <button id="hint" class="btn btn-warning me-2">Hint</button>
+                    <button id="solve" class="btn btn-danger">Solve</button>
+                </div>
+                
+                <div class="number-pad mt-4">
+                    <div class="number-buttons">
+                        <button class="btn btn-number" data-number="1">1</button>
+                        <button class="btn btn-number" data-number="2">2</button>
+                        <button class="btn btn-number" data-number="3">3</button>
+                        <button class="btn btn-number" data-number="4">4</button>
+                        <button class="btn btn-number" data-number="5">5</button>
+                        <button class="btn btn-number" data-number="6">6</button>
+                        <button class="btn btn-number" data-number="7">7</button>
+                        <button class="btn btn-number" data-number="8">8</button>
+                        <button class="btn btn-number" data-number="9">9</button>
+                        <button class="btn btn-number btn-erase" data-number="0">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="languages.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

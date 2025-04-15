@@ -1,0 +1,333 @@
+/* CSS變量 - 主題顏色 */
+:root {
+    /* 淺色主題 (默認) */
+    --bg-color: #f8f9fa;
+    --text-color: #495057;
+    --title-color: #6c757d;
+    --board-bg: #dee2e6;
+    --board-border: #6c757d;
+    --cell-bg: #fff;
+    --cell-hover: #e9ecef;
+    --cell-selected-bg: #cfe2ff;
+    --cell-selected-color: #0d6efd;
+    --given-color: #212529;
+    --correct-color: #198754;
+    --incorrect-color: #dc3545;
+    --btn-bg: #e9ecef;
+    --btn-color: #495057;
+    --btn-border: #ced4da;
+    --btn-hover-bg: #adb5bd;
+    --btn-hover-color: white;
+    --modal-bg: rgba(0, 0, 0, 0.5);
+    --modal-content-bg: #fff;
+}
+
+/* 深色主題 */
+body.dark-theme {
+    --bg-color: #212529;
+    --text-color: #e9ecef;
+    --title-color: #adb5bd;
+    --board-bg: #495057;
+    --board-border: #adb5bd;
+    --cell-bg: #343a40;
+    --cell-hover: #495057;
+    --cell-selected-bg: #0d6efd;
+    --cell-selected-color: #fff;
+    --given-color: #f8f9fa;
+    --correct-color: #20c997;
+    --incorrect-color: #ff6b6b;
+    --btn-bg: #343a40;
+    --btn-color: #e9ecef;
+    --btn-border: #495057;
+    --btn-hover-bg: #6c757d;
+    --btn-hover-color: white;
+    --modal-bg: rgba(0, 0, 0, 0.7);
+    --modal-content-bg: #343a40;
+}
+
+/* 全局樣式 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 800px;
+}
+
+h1 {
+    color: var(--title-color);
+    font-weight: 600;
+}
+
+/* 難度選擇器 */
+.difficulty-selector {
+    margin-bottom: 20px;
+}
+
+.btn-difficulty {
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+    border: 1px solid var(--btn-border);
+    margin: 0 5px;
+    transition: all 0.3s;
+}
+
+.btn-difficulty:hover, .btn-difficulty.active {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+}
+
+/* 遊戲信息 */
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    font-size: 1.1rem;
+}
+
+/* 數獨棋盤 */
+.sudoku-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 1px;
+    padding: 5px;
+    background-color: var(--board-bg);
+    border: 2px solid var(--board-border);
+    border-radius: 5px;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cell-bg);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cell:hover {
+    background-color: var(--cell-hover);
+}
+
+.cell.selected {
+    background-color: var(--cell-selected-bg);
+    color: var(--cell-selected-color);
+}
+
+.cell.given {
+    font-weight: bold;
+    color: var(--given-color);
+    background-color: var(--cell-bg);
+}
+
+.cell.correct {
+    color: var(--correct-color);
+}
+
+.cell.incorrect {
+    color: var(--incorrect-color);
+}
+
+/* 3x3 區塊邊框 */
+.cell:nth-child(3n) {
+    border-right: 2px solid #6c757d;
+}
+
+.cell:nth-child(9n) {
+    border-right: none;
+}
+
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid #6c757d;
+}
+
+/* 控制按鈕 */
+.controls .btn {
+    margin: 0 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.btn-primary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* 數字鍵盤 */
+.number-pad {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.number-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.btn-number {
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+    border: 1px solid var(--btn-border);
+    font-size: 1.2rem;
+    padding: 10px;
+    transition: all 0.3s;
+}
+
+.btn-number:hover {
+    background-color: #adb5bd;
+    color: white;
+}
+
+.btn-erase {
+    grid-column: span 2;
+    background-color: #f8d7da;
+    color: #dc3545;
+}
+
+/* 主題和語言選擇器 */
+.settings-bar {
+    margin-bottom: 15px;
+}
+
+.theme-selector, .language-selector {
+    display: flex;
+    align-items: center;
+}
+
+.btn-theme, .btn-language {
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+    border: 1px solid var(--btn-border);
+    margin: 0 3px;
+    transition: all 0.3s;
+    font-size: 1.2rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    min-width: 2.5rem;
+}
+
+/* 國旗圖標樣式 */
+.flag-icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* 主題圖標樣式 */
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
+.btn-theme:hover, .btn-language:hover,
+.btn-theme.active, .btn-language.active {
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+}
+
+/* 響應式設計 */
+@media (max-width: 576px) {
+    .cell {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    .number-buttons {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .controls .btn {
+        margin: 5px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 遊戲完成彈窗 */
+.game-complete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: none;
+}
+
+.game-complete-content {
+    background-color: var(--modal-content-bg);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.game-complete h2 {
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.game-complete p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.game-complete button {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.game-complete button:hover {
+    background-color: #5a6268;
+}
