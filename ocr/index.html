@@ -54,7 +54,7 @@
         }
         #imagePreview img {
             max-width: 100%;
-            max-height: 300px;
+            max-height: 400px; /* 增加圖片最大高度 */
             margin-top: 1rem;
             border-radius: 0.5rem;
             border: 1px solid #4a4a8a;
@@ -105,7 +105,7 @@
         </header>
 
         <div class="bento-grid">
-            <div class="bento-item md:col-span-2" data-motion-initial="{ opacity: 0, y: 50 }" data-motion-while-in-view="{ opacity: 1, y: 0 }" data-motion-transition="{ duration: 0.5 }">
+            <div class="bento-item md:col-span-1 lg:col-span-1" data-motion-initial="{ opacity: 0, y: 50 }" data-motion-while-in-view="{ opacity: 1, y: 0 }" data-motion-transition="{ duration: 0.5 }">
                 <h2><i class="fas fa-upload mr-2"></i>上傳圖片</h2>
                 <div id="uploadArea" class="upload-area rounded-lg">
                     <input type="file" id="imageUpload" accept="image/*" class="hidden">
@@ -117,9 +117,9 @@
                 </div>
             </div>
 
-            <div class="bento-item" data-motion-initial="{ opacity: 0, y: 50 }" data-motion-while-in-view="{ opacity: 1, y: 0 }" data-motion-transition="{ duration: 0.5, delay: 0.2 }">
+            <div class="bento-item md:col-span-1 lg:col-span-2" data-motion-initial="{ opacity: 0, y: 50 }" data-motion-while-in-view="{ opacity: 1, y: 0 }" data-motion-transition="{ duration: 0.5, delay: 0.2 }">
                 <h2><i class="fas fa-eye mr-2"></i>圖片預覽</h2>
-                <div id="imagePreview" class="flex justify-center items-center min-h-[200px]">
+                <div id="imagePreview" class="flex justify-center items-center min-h-[300px]">
                     <p class="text-gray-400">尚未選擇圖片</p>
                 </div>
             </div>
@@ -209,7 +209,7 @@
             //     observer.observe(el);
             // });
 
-            uploadArea.addEventListener('click', () => imageUpload.click());
+            // uploadArea.addEventListener('click', () => imageUpload.click()); // <--- 移除這一行
 
             uploadArea.addEventListener('dragover', (event) => {
                 event.preventDefault();
@@ -240,7 +240,13 @@
                 uploadedFile = file;
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image preview">`;
+                    imagePreview.innerHTML = `
+                        <img src="${e.target.result}" alt="Image preview" class="mb-2 mr-2">
+                        <div class="text-xs text-gray-400 mt-1">
+                            <p>檔案名稱: ${file.name}</p>
+                            <p>檔案大小: ${(file.size / 1024).toFixed(2)} KB</p>
+                        </div>
+                    `;
                     submitBtn.disabled = false;
                     resultArea.innerHTML = '<p class="text-gray-400">圖片已載入，請點擊開始辨識。</p>';
                 }
