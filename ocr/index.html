@@ -98,8 +98,8 @@
 <body>
     <div class="container mx-auto p-4">
         <header class="text-center py-8">
-            <h1 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                <i class="fas fa-brain mr-2"></i>智能圖片內容辨識
+            <h1 class="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+                <i class="fas fa-brain mr-2"></i>智能圖片<br class="md:hidden">內容辨識
             </h1>
             <p class="text-xl mt-2 text-gray-300">上傳您的圖片，讓我們為您解析其中奧秘</p>
         </header>
@@ -147,8 +147,8 @@
         </div>
 
         <footer class="footer">
-            <p>&copy; 2024 OurFunMedia. All rights reserved.</p>
-            <p>圖片來源及技術引用：TailwindCSS, Framer Motion, Font Awesome, n8n (示意)</p>
+            <p>&copy; 2025 OurFunMedia. All rights reserved.</p>
+            <p>圖片來源及技術引用：TailwindCSS, Framer Motion, Font Awesome, n8n</p>
         </footer>
     </div>
 
@@ -241,10 +241,12 @@
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     imagePreview.innerHTML = `
-                        <img src="${e.target.result}" alt="Image preview" class="mb-2 mr-2">
-                        <div class="text-xs text-gray-400 mt-1">
-                            <p>檔案名稱: ${file.name}</p>
-                            <p>檔案大小: ${(file.size / 1024).toFixed(2)} KB</p>
+                        <div class="flex flex-col md:flex-row items-center">
+                            <img src="${e.target.result}" alt="Image preview" class="mb-2 md:mb-0 md:mr-2">
+                            <div class="text-xs text-gray-400 mt-1 md:mt-0">
+                                <p>檔案名稱: ${file.name}</p>
+                                <p>檔案大小: ${(file.size / 1024).toFixed(2)} KB</p>
+                            </div>
                         </div>
                     `;
                     submitBtn.disabled = false;
