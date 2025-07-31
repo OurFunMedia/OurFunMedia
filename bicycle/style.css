@@ -1,0 +1,44 @@
+/* ========================================
+    全局樣式 (Global Styles)
+    ========================================
+    我們希望地圖能夠佔滿整個瀏覽器視窗，
+    因此需要移除 body 的預設邊距 (margin) 並設定其高度。
+*/
+html, body {
+    height: 100%; /* 設定高度為視窗的 100% */
+    margin: 0;   /* 移除預設的邊距 */
+    padding: 0;  /* 移除預設的內距 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; /* 使用現代化的系統字體 */
+}
+
+/* ========================================
+    地圖容器樣式 (Map Container Styles)
+    ========================================
+    這個樣式確保我們在 index.html 中定義的 <div id="map"> 容器
+    能夠正確地延展並填滿整個畫面。
+*/
+#map {
+    width: 100%;
+    height: 100%;
+    cursor: grab; /* 當滑鼠在地圖上時，顯示為可抓取的手形圖標 */
+}
+
+/* ========================================
+    Leaflet 彈出視窗微調 (Leaflet Popup Tweaks) - 可選
+    ========================================
+    稍微調整 Leaflet 預設彈出視窗的樣式，使其更具現代感。
+*/
+.leaflet-popup-content-wrapper {
+    border-radius: 8px; /* 圓角邊框 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 增加陰影效果 */
+}
+
+.leaflet-popup-content {
+    margin: 14px 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.leaflet-popup-content p {
+    margin: 10px 0;
+}
