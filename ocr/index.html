@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
-            background-color: #1a1a2e; /* 深藍紫色背景 */
-            color: #e0e0e0; /* 淺灰色文字 */
+            background-color: #1a1a2e;
+            color: #e0e0e0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .bento-grid {
@@ -20,7 +20,7 @@
             padding: 2rem;
         }
         .bento-item {
-            background: linear-gradient(145deg, rgba(42, 42, 80, 0.7), rgba(26, 26, 46, 0.7)); /* 透明漸層背景 */
+            background: linear-gradient(145deg, rgba(42, 42, 80, 0.7), rgba(26, 26, 46, 0.7));
             backdrop-filter: blur(10px);
             border-radius: 1rem;
             padding: 1.5rem;
@@ -36,14 +36,14 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #9bf6ff; /* 亮藍色標題 */
+            color: #9bf6ff;
         }
         .bento-item p, .bento-item div {
             font-size: 0.9rem;
             line-height: 1.6;
         }
         .upload-area {
-            border: 2px dashed #4a4a8a; /* 虛線邊框 */
+            border: 2px dashed #4a4a8a;
             padding: 2rem;
             text-align: center;
             cursor: pointer;
@@ -54,7 +54,7 @@
         }
         #imagePreview img {
             max-width: 100%;
-            max-height: 400px; /* 增加圖片最大高度 */
+            max-height: 400px;
             margin-top: 1rem;
             border-radius: 0.5rem;
             border: 1px solid #4a4a8a;
@@ -75,7 +75,7 @@
             margin-top: 2rem;
         }
         .btn {
-            background: linear-gradient(to right, #6a11cb, #2575fc); /* 紫藍漸層按鈕 */
+            background: linear-gradient(to right, #6a11cb, #2575fc);
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
@@ -88,9 +88,9 @@
             opacity: 0.9;
         }
         .highlight-text {
-            font-size: 3rem; /* 超大字體 */
+            font-size: 3rem;
             font-weight: bold;
-            color: #ffcc00; /* 亮黃色 */
+            color: #ffcc00;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
     </style>
@@ -105,7 +105,7 @@
         </header>
 
         <div class="bento-grid">
-            <div class="bento-item md:col-span-1 lg:col-span-1" data-motion-initial="{ opacity: 0, y: 50 }" data-motion-while-in-view="{ opacity: 1, y: 0 }" data-motion-transition="{ duration: 0.5 }">
+            <div class="bento-item md:col-span-1 lg:col-span-1">
                 <h2><i class="fas fa-upload mr-2"></i>上傳圖片</h2>
                 <div id="uploadArea" class="upload-area rounded-lg">
                     <input type="file" id="imageUpload" accept="image/*" class="hidden">
@@ -117,14 +117,14 @@
                 </div>
             </div>
 
-            <div class="bento-item md:col-span-1 lg:col-span-2" data-motion-initial="{ opacity: 0, y: 50 }" data-motion-while-in-view="{ opacity: 1, y: 0 }" data-motion-transition="{ duration: 0.5, delay: 0.2 }">
+            <div class="bento-item md:col-span-1 lg:col-span-2">
                 <h2><i class="fas fa-eye mr-2"></i>圖片預覽</h2>
                 <div id="imagePreview" class="flex justify-center items-center min-h-[300px]">
                     <p class="text-gray-400">尚未選擇圖片</p>
                 </div>
             </div>
 
-            <div class="bento-item md:col-span-3" data-motion-initial="{ opacity: 0, y: 50 }" data-motion-while-in-view="{ opacity: 1, y: 0 }" data-motion-transition="{ duration: 0.5, delay: 0.4 }">
+            <div class="bento-item md:col-span-3">
                 <h2><i class="fas fa-cogs mr-2"></i>辨識結果</h2>
                 <div id="resultArea" class="result-area">
                     <p class="text-gray-400">辨識結果將顯示於此...</p>
@@ -133,17 +133,6 @@
                     <i class="fas fa-paper-plane mr-2"></i>開始辨識
                 </button>
             </div>
-
-            <!-- <div class="bento-item" data-motion-initial="{ opacity: 0, scale: 0.8 }" data-motion-while-in-view="{ opacity: 1, scale: 1 }" data-motion-transition="{ duration: 0.5, delay: 0.6 }">
-                <h2 class="text-center"><i class="fas fa-lightbulb mr-2"></i>核心亮點</h2>
-                <p class="highlight-text text-center">AI</p>
-                <p class="text-center text-gray-300">先進的圖像識別技術</p>
-            </div>
-
-            <div class="bento-item" data-motion-initial="{ opacity: 0, scale: 0.8 }" data-motion-while-in-view="{ opacity: 1, scale: 1 }" data-motion-transition="{ duration: 0.5, delay: 0.7 }">
-                <h2 class="text-center"><i class="fas fa-tachometer-alt mr-2"></i>快速高效</h2>
-                <p class="text-center text-gray-300">秒級響應，即時獲取結果</p>
-            </div> -->
         </div>
 
         <footer class="footer">
@@ -153,18 +142,6 @@
     </div>
 
     <script>
-        // // 確保 Motion 對象存在於 window，Framer Motion CDN 通常將其掛載到 window.motion 或 window.Motion
-        // const motion = window.motion || (window.Motion ? window.Motion.motion : undefined);
-        // // useAnimation 是 React Hook，在純 JS 中不直接這樣使用，移除或尋找替代方案
-        // // 如果只是要觸發動畫，可以通過直接操作 style 或使用 motion() API (如果適用於純 JS)
-        // // 鑒於之前的修改已經移除了 useAnimation 的直接依賴，這裡可以安全地註釋或移除
-        // // const useAnimation = window.Motion ? window.Motion.useAnimation : undefined; 
-
-        // // 如果 motion 未定義，可以給出提示或使用備用方案
-        // if (!motion) {
-        //     console.warn('Framer Motion (motion) not found. Animations might not work as expected.');
-        // }
-
         document.addEventListener('DOMContentLoaded', () => {
             const imageUpload = document.getElementById('imageUpload');
             const imagePreview = document.getElementById('imagePreview');
@@ -173,44 +150,7 @@
             const uploadArea = document.getElementById('uploadArea');
             let uploadedFile = null;
 
-            // // Framer Motion 動畫的簡易實現 (不依賴 useAnimation) - 暫時註解以排查問題
-            // document.querySelectorAll('[data-motion-initial]').forEach(el => {
-            //     const initial = JSON.parse(el.dataset.motionInitial || '{}');
-            //     const whileInView = JSON.parse(el.dataset.motionWhileInView || '{}');
-            //     const transition = JSON.parse(el.dataset.motionTransition || '{ "duration": 0.5 }');
-
-            //     // 設定初始樣式
-            //     if (initial.opacity !== undefined) el.style.opacity = initial.opacity;
-            //     let initialTransform = '';
-            //     if (initial.y) initialTransform += `translateY(${initial.y}px) `;
-            //     if (initial.x) initialTransform += `translateX(${initial.x}px) `;
-            //     if (initial.scale) initialTransform += `scale(${initial.scale}) `;
-            //     if (initialTransform) el.style.transform = initialTransform.trim();
-
-            //     el.style.transition = `opacity ${transition.duration || 0.5}s ease, transform ${transition.duration || 0.5}s ease`;
-            //     if (transition.delay) {
-            //         el.style.transitionDelay = `${transition.delay}s`;
-            //     }
-
-            //     const observer = new IntersectionObserver((entries) => {
-            //         entries.forEach(entry => {
-            //             if (entry.isIntersecting) {
-            //                 if (whileInView.opacity !== undefined) el.style.opacity = whileInView.opacity;
-            //                 let targetTransform = '';
-            //                 if (whileInView.y !== undefined) targetTransform += `translateY(${whileInView.y}px) `;
-            //                 if (whileInView.x !== undefined) targetTransform += `translateX(${whileInView.x}px) `;
-            //                 if (whileInView.scale !== undefined) targetTransform += `scale(${whileInView.scale}) `;
-            //                 if (targetTransform) el.style.transform = targetTransform.trim();
-            //                 else if (initialTransform) el.style.transform = 'translateY(0) translateX(0) scale(1)'; // 預設回到無位移
-            //                 observer.unobserve(el); // 動畫觸發一次後停止觀察
-            //             }
-            //         });
-            //     }, { threshold: 0.1 });
-            //     observer.observe(el);
-            // });
-
-            // uploadArea.addEventListener('click', () => imageUpload.click()); // <--- 移除這一行
-
+            // 拖放事件
             uploadArea.addEventListener('dragover', (event) => {
                 event.preventDefault();
                 uploadArea.classList.add('bg-purple-700', 'bg-opacity-20');
@@ -251,7 +191,7 @@
                     `;
                     submitBtn.disabled = false;
                     resultArea.innerHTML = '<p class="text-gray-400">圖片已載入，請點擊開始辨識。</p>';
-                }
+                };
                 reader.readAsDataURL(file);
             }
 
@@ -266,8 +206,8 @@
                 resultArea.innerHTML = '<p class="text-yellow-400">正在將圖片傳送到伺服器並進行辨識，請稍候...</p>';
 
                 const formData = new FormData();
-                formData.append('data', uploadedFile); // 根據 n8n 的 Input Binary Field 設定，應為 'data'
-                const webhookUrl = 'https://n8n.on9work.dpdns.org/webhook/8e212c5e-1586-4bb3-bb18-82dc303f7976';
+                formData.append('data', uploadedFile);
+                const webhookUrl = 'https://on9n8n.zeabur.app/webhook/6f2a528f-3b9c-4074-909f-7567cd9d840f';
 
                 try {
                     const response = await fetch(webhookUrl, {
@@ -280,49 +220,45 @@
                         throw new Error(`Webhook 請求失敗: ${response.status} ${response.statusText} - ${errorText}`);
                     }
 
-                    const results = await response.json(); // 假設 n8n 回傳 JSON
+                    let recognizedText = "";
 
-                    // 根據 n8n 的實際回傳格式調整以下處理邏輯
-                    // 這裡假設 results 是一個物件，其中有一個名為 'items' 或 'data' 的陣列包含辨識結果
-                    // 或者 results 本身就是一個結果陣列
-                    // 例如: const items = results.items || results.data || results;
-                    // 並且每個 item 有 label 和 score 屬性
-
-                    // 為了演示，我們假設 n8n 回傳的 JSON 結構類似於：
-                    // { "predictions": [ { "label": "貓", "score": 0.95 }, { "label": "沙發", "score": 0.88 } ] }
-                    // 或者直接是 [ { "label": "貓", "score": 0.95 }, ... ]
-                    
-                    // 根據使用者提供的截圖，n8n 回傳的 JSON 結構是單個物件，包含 name 欄位
-                    // 例如: { "id": "xxx", "name": "以人為本", "url": "..." }
-                    if (results && typeof results === 'object' && results.name) {
-                        const recognizedText = results.name;
-                        resultArea.innerHTML = `
-                            <h3 class="text-lg font-semibold mb-2 text-teal-300">辨識到的文字內容：</h3>
-                            <div class="flex items-center">
-                                <p class="text-xl text-green-400 mr-2">${recognizedText}</p>
-                                <button id="copyBtn" title="複製結果" class="p-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
-                                    <i class="fas fa-copy text-gray-300 hover:text-white"></i>
-                                </button>
-                            </div>`;
-                        
-                        const copyBtn = document.getElementById('copyBtn');
-                        if (copyBtn) {
-                            copyBtn.addEventListener('click', () => {
-                                navigator.clipboard.writeText(recognizedText).then(() => {
-                                    // 可以加入複製成功的提示，例如改變圖示或顯示文字
-                                    copyBtn.innerHTML = '<i class="fas fa-check text-green-400"></i>';
-                                    setTimeout(() => {
-                                        copyBtn.innerHTML = '<i class="fas fa-copy text-gray-300 hover:text-white"></i>';
-                                    }, 2000);
-                                }).catch(err => {
-                                    console.error('無法複製文字: ', err);
-                                    alert('複製失敗，您的瀏覽器可能不支援此功能或未授予權限。');
-                                });
-                            });
+                    // ✅ 容錯處理：先嘗試解析 JSON，失敗則當純文字處理
+                    try {
+                        const results = await response.clone().json(); // clone() 避免 body 被消耗
+                        if (results && typeof results === 'object' && results.name) {
+                            recognizedText = results.name;
+                        } else {
+                            throw new Error("JSON 格式不符預期");
                         }
-                    } else {
-                        // 如果回傳格式未知或不符合預期，可以顯示原始 JSON
-                        resultArea.innerHTML = `<p class="text-yellow-300">收到未預期的回應格式，或未包含 'name' 欄位：</p><pre class="whitespace-pre-wrap text-xs">${JSON.stringify(results, null, 2)}</pre>`;
+                    } catch (jsonError) {
+                        // 解析 JSON 失敗 → 改讀純文字
+                        recognizedText = await response.text();
+                    }
+
+                    // ✅ 顯示結果（支援換行、特殊符號）
+                    resultArea.innerHTML = `
+                        <h3 class="text-lg font-semibold mb-2 text-teal-300">辨識結果：</h3>
+                        <div class="flex flex-col md:flex-row items-start md:items-center">
+                            <pre class="text-xl text-green-400 whitespace-pre-wrap flex-1">${recognizedText}</pre>
+                            <button id="copyBtn" title="複製結果" class="p-2 mt-2 md:mt-0 md:ml-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <i class="fas fa-copy text-gray-300 hover:text-white"></i>
+                            </button>
+                        </div>`;
+
+                    // ✅ 複製功能
+                    const copyBtn = document.getElementById('copyBtn');
+                    if (copyBtn) {
+                        copyBtn.addEventListener('click', () => {
+                            navigator.clipboard.writeText(recognizedText).then(() => {
+                                copyBtn.innerHTML = '<i class="fas fa-check text-green-400"></i>';
+                                setTimeout(() => {
+                                    copyBtn.innerHTML = '<i class="fas fa-copy text-gray-300 hover:text-white"></i>';
+                                }, 2000);
+                            }).catch(err => {
+                                console.error('無法複製文字: ', err);
+                                alert('複製失敗，您的瀏覽器可能不支援此功能或未授予權限。');
+                            });
+                        });
                     }
 
                 } catch (error) {
