@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片內容辨識</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/11.2.10/framer-motion.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .bento-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            padding: 2rem;
+        }
+        .bento-item {
+            background: linear-gradient(145deg, rgba(42, 42, 80, 0.7), rgba(26, 26, 46, 0.7));
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+        }
+        .bento-item h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #9bf6ff;
+        }
+        .bento-item p, .bento-item div {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .upload-area {
+            border: 2px dashed #4a4a8a;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .upload-area:hover {
+            background-color: rgba(74, 74, 138, 0.3);
+        }
+        #imagePreview img {
+            max-width: 100%;
+            max-height: 400px;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #4a4a8a;
+        }
+        .result-area {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 0.5rem;
+            min-height: 100px;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #aaa;
+            border-top: 1px solid #333;
+            margin-top: 2rem;
+        }
+        .btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .highlight-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4">
+        <header class="text-center py-8">
+            <h1 class="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+                <i class="fas fa-brain mr-2"></i>智能圖片<br class="md:hidden">內容辨識
+            </h1>
+            <p class="text-xl mt-2 text-gray-300">上傳您的圖片，讓我們為您解析其中奧秘</p>
+        </header>
+
+        <div class="bento-grid">
+            <div class="bento-item md:col-span-1 lg:col-span-1">
+                <h2><i class="fas fa-upload mr-2"></i>上傳圖片</h2>
+                <div id="uploadArea" class="upload-area rounded-lg">
+                    <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                    <label for="imageUpload" class="cursor-pointer">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-purple-400 mb-2"></i>
+                        <p>點擊此處或拖曳圖片到這裡</p>
+                        <p class="text-xs text-gray-400">支援 JPG, PNG, GIF 等格式</p>
+                    </label>
+                </div>
+            </div>
+
+            <div class="bento-item md:col-span-1 lg:col-span-2">
+                <h2><i class="fas fa-eye mr-2"></i>圖片預覽</h2>
+                <div id="imagePreview" class="flex justify-center items-center min-h-[300px]">
+                    <p class="text-gray-400">尚未選擇圖片</p>
+                </div>
+            </div>
+
+            <div class="bento-item md:col-span-3">
+                <h2><i class="fas fa-cogs mr-2"></i>辨識結果</h2>
+                <div id="resultArea" class="result-area">
+                    <p class="text-gray-400">辨識結果將顯示於此...</p>
+                </div>
+                <button id="submitBtn" class="btn mt-4 w-full md:w-auto" disabled>
+                    <i class="fas fa-paper-plane mr-2"></i>開始辨識
+                </button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 OurFunMedia. All rights reserved.</p>
+            <p>圖片來源及技術引用：TailwindCSS, Framer Motion, Font Awesome, n8n</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreview = document.getElementById('imagePreview');
+            const resultArea = document.getElementById('resultArea');
+            const submitBtn = document.getElementById('submitBtn');
+            const uploadArea = document.getElementById('uploadArea');
+            let uploadedFile = null;
+
+            // 拖放事件
+            uploadArea.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                uploadArea.classList.add('bg-purple-700', 'bg-opacity-20');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('bg-purple-700', 'bg-opacity-20');
+            });
+
+            uploadArea.addEventListener('drop', (event) => {
+                event.preventDefault();
+                uploadArea.classList.remove('bg-purple-700', 'bg-opacity-20');
+                const files = event.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+
+            imageUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    handleFile(file);
+                }
+            });
+
+            function handleFile(file) {
+                uploadedFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.innerHTML = `
+                        <div class="flex flex-col md:flex-row items-center">
+                            <img src="${e.target.result}" alt="Image preview" class="mb-2 md:mb-0 md:mr-2">
+                            <div class="text-xs text-gray-400 mt-1 md:mt-0">
+                                <p>檔案名稱: ${file.name}</p>
+                                <p>檔案大小: ${(file.size / 1024).toFixed(2)} KB</p>
+                            </div>
+                        </div>
+                    `;
+                    submitBtn.disabled = false;
+                    resultArea.innerHTML = '<p class="text-gray-400">圖片已載入，請點擊開始辨識。</p>';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            submitBtn.addEventListener('click', async () => {
+                if (!uploadedFile) {
+                    alert('請先上傳一張圖片！');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>辨識中...';
+                resultArea.innerHTML = '<p class="text-yellow-400">正在將圖片傳送到伺服器並進行辨識，請稍候...</p>';
+
+                const formData = new FormData();
+                formData.append('data', uploadedFile);
+                const webhookUrl = 'https://on9n8n.zeabur.app/webhook/a12cb8ee-cd6e-4259-936c-9acdb4a1c710';
+
+                try {
+                    const response = await fetch(webhookUrl, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Webhook 請求失敗: ${response.status} ${response.statusText} - ${errorText}`);
+                    }
+
+                    let recognizedText = "";
+
+                    // ✅ 容錯處理：先嘗試解析 JSON，失敗則當純文字處理
+                    try {
+                        const results = await response.clone().json(); // clone() 避免 body 被消耗
+                        if (results && typeof results === 'object' && results.name) {
+                            recognizedText = results.name;
+                        } else {
+                            throw new Error("JSON 格式不符預期");
+                        }
+                    } catch (jsonError) {
+                        // 解析 JSON 失敗 → 改讀純文字
+                        recognizedText = await response.text();
+                    }
+
+                    // ✅ 顯示結果（支援換行、特殊符號）
+                    resultArea.innerHTML = `
+                        <h3 class="text-lg font-semibold mb-2 text-teal-300">辨識結果：</h3>
+                        <div class="flex flex-col md:flex-row items-start md:items-center">
+                            <pre class="text-xl text-green-400 whitespace-pre-wrap flex-1">${recognizedText}</pre>
+                            <button id="copyBtn" title="複製結果" class="p-2 mt-2 md:mt-0 md:ml-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <i class="fas fa-copy text-gray-300 hover:text-white"></i>
+                            </button>
+                        </div>`;
+
+                    // ✅ 複製功能
+                    const copyBtn = document.getElementById('copyBtn');
+                    if (copyBtn) {
+                        copyBtn.addEventListener('click', () => {
+                            navigator.clipboard.writeText(recognizedText).then(() => {
+                                copyBtn.innerHTML = '<i class="fas fa-check text-green-400"></i>';
+                                setTimeout(() => {
+                                    copyBtn.innerHTML = '<i class="fas fa-copy text-gray-300 hover:text-white"></i>';
+                                }, 2000);
+                            }).catch(err => {
+                                console.error('無法複製文字: ', err);
+                                alert('複製失敗，您的瀏覽器可能不支援此功能或未授予權限。');
+                            });
+                        });
+                    }
+
+                } catch (error) {
+                    console.error('辨識過程中發生錯誤:', error);
+                    resultArea.innerHTML = `<p class="text-red-400">辨識失敗：${error.message || '發生未知錯誤，請檢查主控台。'}</p>`;
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>重新辨識';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
